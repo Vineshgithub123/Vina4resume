@@ -108,15 +108,21 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 
 app.post('/api/changeAdminUname',(req,res)=>{
+      res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   setEnvValue("ADMIN_USERNAME", req.body.data);
 })
 
 app.post('/api/changeAdminPwd',(req,res)=>{
+      res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   setEnvValue("ADMIN_PASSWORD", req.body.data);
 })
 
 
 app.post('/api/insert', function (req, res) {
+      res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(currentUser);
   // console.log('reqdata',req.body.data.personal.personalDetails)
     console.log(req.body.data);
@@ -215,6 +221,8 @@ app.get('/api/getTemp', function(req,res){
 
 
  app.post('/api/sendTempid', function (req, res) {
+       res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   console.log(currentUser);
   // console.log('reqdata',req.body.data.personal.personalDetails)
 tempId=req.body.id;
@@ -310,7 +318,8 @@ app.post('/api/login', (req, res) => {
 
   let name='';
   app.get('/api/username',(req,res)=>{
-
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
     console.log("backend connected for name",currentUser);
     signup
     .findOne({emailid:currentUser },(err,data)=>{
@@ -364,7 +373,8 @@ app.post('/api/login_admin', (req, res) => {
 
   // admin templates CRUD operations
   app.get('/api/avlTemplates', function(req,res){
-  
+      res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
     avltemp
     .findOne({ _id: "62ecc20595b39551c2f9c9b1" },(err,data)=>{
       if(!data){
@@ -380,6 +390,8 @@ app.post('/api/login_admin', (req, res) => {
   })
 
   app.delete('/api/delete_avltemp/:id',(req,res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
     console.log('del temp', req.params.id)
     // const index = avlTemp.indexOf(req.params.id);
     // avlTemp.splice(index,1);
@@ -399,7 +411,8 @@ app.post('/api/login_admin', (req, res) => {
 
 
   app.put('/api/add_avltemp',(req,res)=>{
-
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
 
     avltemp.findByIdAndUpdate({_id:"62ecc20595b39551c2f9c9b1"}, {$addToSet:{avlTemp:req.body.data}},{safe: true, new:true},(err,temp) => {
       if(temp){
@@ -417,7 +430,8 @@ app.post('/api/login_admin', (req, res) => {
   // send mail
 
   app.post('/api/sendmail',(req, res)=>{
-
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
 
     resumecred.findOne({userid:currentUser},(err,data)=>{
       if(data){
@@ -467,6 +481,8 @@ app.post('/api/login_admin', (req, res) => {
 
 // get user details to admin page
 app.get('/api/displayusercred',(req,res)=>{
+      res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
   signup.find()
   .then((data1)=>{
     res.send(data1)
@@ -474,6 +490,8 @@ app.get('/api/displayusercred',(req,res)=>{
 })
 
 app.delete('/api/deleteusercred/:id',(req,res)=>{
+      res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Method:GET,POST,PUT,DELETE");
 id=req.params.id
 signup.findByIdAndRemove({"_id":id })
 .then(()=>{
